@@ -1,3 +1,4 @@
+#define BLUE_LED 2
 // =============================================================================
 // AgriBot ESP32 WROOM Firmware – micro-ROS + FreeRTOS Dual-Core
 //
@@ -666,6 +667,7 @@ IPAddress connectAndResolveAgent() {
     }
     Serial.printf("\n[WIFI] Connected – IP %s\n",
                   WiFi.localIP().toString().c_str());
+    digitalWrite(BLUE_LED, HIGH);
 
     // 2. Broadcast our own mDNS hostname  →  esp.local
     if (!MDNS.begin(MDNS_HOSTNAME)) {
@@ -696,6 +698,7 @@ IPAddress connectAndResolveAgent() {
 
 void setup() {
     Serial.begin(115200);
+    pinMode(BLUE_LED, OUTPUT);
     delay(500);
 
     Serial.println();

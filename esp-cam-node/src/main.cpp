@@ -1,3 +1,4 @@
+#define BLUE_LED 2
 // ═══════════════════════════════════════════════════════════════════════════
 //  AgriBot Camera Node – ESP32-CAM (AI Thinker) Firmware
 //  ─────────────────────────────────────────────────────────────────────────
@@ -499,6 +500,7 @@ static bool connectWiFi() {
     Serial.printf("\n[cam] WiFi connected  IP: %s  RSSI: %d dBm\n",
                   WiFi.localIP().toString().c_str(),
                   WiFi.RSSI());
+    digitalWrite(BLUE_LED, HIGH);
     return true;
 }
 
@@ -564,6 +566,7 @@ static void wifiWatchdogTask(void* param) {
 void setup() {
     g_boot_time_ms = millis();
     Serial.begin(115200);
+    pinMode(BLUE_LED, OUTPUT);
     Serial.setDebugOutput(true);
     delay(500);
 

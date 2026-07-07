@@ -1,3 +1,4 @@
+#define BLUE_LED 2
 // ═══════════════════════════════════════════════════════════════════════════
 //  AgriBot Drive Node – ESP32 micro-ROS Firmware
 //  ─────────────────────────────────────────────────────────────────────────
@@ -181,6 +182,7 @@ public:
     // ── Startup sequence ─────────────────────────────────────────────
     bool begin() {
         Serial.begin(115200);
+    pinMode(BLUE_LED, OUTPUT);
         delay(500);
         Serial.println("[drive] Booting...");
 
@@ -282,6 +284,7 @@ private:
         }
         Serial.printf("\n[drive] WiFi OK  IP: %s\n",
                        WiFi.localIP().toString().c_str());
+        digitalWrite(BLUE_LED, HIGH);
         return true;
     }
 
