@@ -50,16 +50,44 @@ CREATE TABLE IF NOT EXISTS sensor_logs (
     temperature   REAL,
     humidity      REAL,
     soil_raw      INTEGER,
-    soil_percent  REAL
+    soil_percent  REAL,
+    ph_level      REAL,
+    condition     TEXT,
+    chance_of_rain REAL,
+    will_it_rain  INTEGER,
+    uv_index      REAL,
+    wind_kph      REAL,
+    aqi_us_epa    INTEGER,
+    aqi_co        REAL,
+    aqi_no2       REAL,
+    aqi_o3        REAL,
+    aqi_so2       REAL,
+    aqi_pm25      REAL,
+    aqi_pm10      REAL
 );
 """
-
 
 def _ensure_db():
     """Create the database directory and table if they don't exist yet."""
     os.makedirs(DB_DIR, exist_ok=True)
     conn = sqlite3.connect(DB_PATH)
-    conn.execute(CREATE_TABLE_SQL)
+    # Add new columns if missing
+    try:
+        conn.execute(CREATE_TABLE_SQL)
+        # Attempt to alter table if it already exists (SQLite alter table is limited, simple approach)
+        columns_to_add = [
+            ("ph_level", "REAL"), ("condition", "TEXT"), ("chance_of_rain", "REAL"),
+            ("will_it_rain", "INTEGER"), ("uv_index", "REAL"), ("wind_kph", "REAL"),
+            ("aqi_us_epa", "INTEGER"), ("aqi_co", "REAL"), ("aqi_no2", "REAL"),
+            ("aqi_o3", "REAL"), ("aqi_so2", "REAL"), ("aqi_pm25", "REAL"), ("aqi_pm10", "REAL")
+        ]
+        for col, col_type in columns_to_add:
+            try:
+                conn.execute(f"ALTER TABLE sensor_logs ADD COLUMN {col} {col_type}")
+            except sqlite3.OperationalError:
+                pass
+    except sqlite3.Error as e:
+        print(e)
     conn.commit()
     conn.close()
 
@@ -82,6 +110,19 @@ def _get_db():
 class MoistureReading(BaseModel):
     raw: int
     percent: float
+    ph: Optional[float] = None
+    condition: Optional[str] = None
+    chance_of_rain: Optional[float] = None
+    will_it_rain: Optional[int] = None
+    uv_index: Optional[float] = None
+    wind_kph: Optional[float] = None
+    aqi_us_epa: Optional[int] = None
+    aqi_co: Optional[float] = None
+    aqi_no2: Optional[float] = None
+    aqi_o3: Optional[float] = None
+    aqi_so2: Optional[float] = None
+    aqi_pm25: Optional[float] = None
+    aqi_pm10: Optional[float] = None
 
 
 class LogEntry(BaseModel):
@@ -92,6 +133,19 @@ class LogEntry(BaseModel):
     humidity: Optional[float] = None
     soil_raw: Optional[int] = None
     soil_percent: Optional[float] = None
+    ph_level: Optional[float] = None
+    condition: Optional[str] = None
+    chance_of_rain: Optional[float] = None
+    will_it_rain: Optional[int] = None
+    uv_index: Optional[float] = None
+    wind_kph: Optional[float] = None
+    aqi_us_epa: Optional[int] = None
+    aqi_co: Optional[float] = None
+    aqi_no2: Optional[float] = None
+    aqi_o3: Optional[float] = None
+    aqi_so2: Optional[float] = None
+    aqi_pm25: Optional[float] = None
+    aqi_pm10: Optional[float] = None
 
 
 # ---------------------------------------------------------------------------
@@ -165,8 +219,16 @@ def post_moisture(reading: MoistureReading):
     now = datetime.now(timezone.utc).isoformat()
     with _get_db() as conn:
         cursor = conn.execute(
-            'INSERT INTO sensor_logs (timestamp, type, soil_raw, soil_percent) VALUES (?, ?, ?, ?)',
-            (now, 'manual', reading.raw, reading.percent),
+            '''INSERT INTO sensor_logs (
+                timestamp, type, soil_raw, soil_percent, ph_level,
+                condition, chance_of_rain, will_it_rain, uv_index, wind_kph,
+                aqi_us_epa, aqi_co, aqi_no2, aqi_o3, aqi_so2, aqi_pm25, aqi_pm10
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+            (now, 'manual', reading.raw, reading.percent, reading.ph,
+             reading.condition, reading.chance_of_rain, reading.will_it_rain,
+             reading.uv_index, reading.wind_kph, reading.aqi_us_epa,
+             reading.aqi_co, reading.aqi_no2, reading.aqi_o3, reading.aqi_so2,
+             reading.aqi_pm25, reading.aqi_pm10),
         )
         conn.commit()
         row = conn.execute(

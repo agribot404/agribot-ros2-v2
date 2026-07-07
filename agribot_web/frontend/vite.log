@@ -3,7 +3,7 @@
 > vite --host
 
 
-  VITE v7.3.5  ready in 1324 ms
+  VITE v7.3.5  ready in 1744 ms
 
   ➜  Local:   http://localhost:5173/
-  ➜  Network: http://192.168.31.157:5173/
+  ➜  Network: http://192.168.0.101:5173/

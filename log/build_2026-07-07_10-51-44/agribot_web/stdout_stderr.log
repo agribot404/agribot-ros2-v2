@@ -1,0 +1,21 @@
+running egg_info
+writing ../build/agribot_web/agribot_web.egg-info/PKG-INFO
+writing dependency_links to ../build/agribot_web/agribot_web.egg-info/dependency_links.txt
+writing entry points to ../build/agribot_web/agribot_web.egg-info/entry_points.txt
+writing requirements to ../build/agribot_web/agribot_web.egg-info/requires.txt
+writing top-level names to ../build/agribot_web/agribot_web.egg-info/top_level.txt
+reading manifest file '../build/agribot_web/agribot_web.egg-info/SOURCES.txt'
+writing manifest file '../build/agribot_web/agribot_web.egg-info/SOURCES.txt'
+running build
+running build_py
+running install
+running install_lib
+running install_data
+copying launch/agribot_web.launch.py -> /home/agribot/agribot-ros2-v2/install/agribot_web/share/agribot_web/launch
+running install_egg_info
+removing '/home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web-1.0.0-py3.10.egg-info' (and everything under it)
+Copying ../build/agribot_web/agribot_web.egg-info to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web-1.0.0-py3.10.egg-info
+running install_scripts
+Installing sensor_logger script to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/agribot_web
+Installing web_server script to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/agribot_web
+writing list of installed files to '/home/agribot/agribot-ros2-v2/build/agribot_web/install.log'

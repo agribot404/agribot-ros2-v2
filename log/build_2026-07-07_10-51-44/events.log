@@ -1,0 +1,89 @@
+[0.000000] (-) TimerEvent: {}
+[0.000781] (agribot_web) JobQueued: {'identifier': 'agribot_web', 'dependencies': OrderedDict()}
+[0.001623] (agribot_web) JobStarted: {'identifier': 'agribot_web'}
+[0.099261] (-) TimerEvent: {}
+[0.199797] (-) TimerEvent: {}
+[0.300402] (-) TimerEvent: {}
+[0.401163] (-) TimerEvent: {}
+[0.501846] (-) TimerEvent: {}
+[0.602333] (-) TimerEvent: {}
+[0.702734] (-) TimerEvent: {}
+[0.803176] (-) TimerEvent: {}
+[0.903626] (-) TimerEvent: {}
+[1.004128] (-) TimerEvent: {}
+[1.104654] (-) TimerEvent: {}
+[1.205215] (-) TimerEvent: {}
+[1.305698] (-) TimerEvent: {}
+[1.406200] (-) TimerEvent: {}
+[1.506635] (-) TimerEvent: {}
+[1.607122] (-) TimerEvent: {}
+[1.707697] (-) TimerEvent: {}
+[1.808321] (-) TimerEvent: {}
+[1.908887] (-) TimerEvent: {}
+[2.009319] (-) TimerEvent: {}
+[2.109775] (-) TimerEvent: {}
+[2.210353] (-) TimerEvent: {}
+[2.310860] (-) TimerEvent: {}
+[2.411312] (-) TimerEvent: {}
+[2.511724] (-) TimerEvent: {}
+[2.612163] (-) TimerEvent: {}
+[2.712627] (-) TimerEvent: {}
+[2.813085] (-) TimerEvent: {}
+[2.913534] (-) TimerEvent: {}
+[3.013987] (-) TimerEvent: {}
+[3.114431] (-) TimerEvent: {}
+[3.215515] (-) TimerEvent: {}
+[3.315934] (-) TimerEvent: {}
+[3.416422] (-) TimerEvent: {}
+[3.516964] (-) TimerEvent: {}
+[3.617443] (-) TimerEvent: {}
+[3.717928] (-) TimerEvent: {}
+[3.818437] (-) TimerEvent: {}
+[3.918913] (-) TimerEvent: {}
+[4.019397] (-) TimerEvent: {}
+[4.119910] (-) TimerEvent: {}
+[4.220442] (-) TimerEvent: {}
+[4.320988] (-) TimerEvent: {}
+[4.421731] (-) TimerEvent: {}
+[4.429563] (agribot_web) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../build/agribot_web', 'build', '--build-base', '/home/agribot/agribot-ros2-v2/build/agribot_web/build', 'install', '--record', '/home/agribot/agribot-ros2-v2/build/agribot_web/install.log', '--install-scripts', '$base/lib/agribot_web', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/agribot/agribot-ros2-v2/agribot_web', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'BLE_SESSION_ID': '1783396137.983496/2198', 'USER': 'agribot', 'SSH_CLIENT': '192.168.0.102 60086 22', 'AGENT': '1', 'XDG_SESSION_TYPE': 'tty', 'GIT_ASKPASS': '/home/agribot/.vscode-server/cli/servers/Stable-61b3d0ab13be7dda2389f1d3e60a119c7f660cc3/server/extensions/git/dist/askpass.sh', 'SHLVL': '2', 'LD_LIBRARY_PATH': '/opt/ros/humble/lib/aarch64-linux-gnu:/opt/ros/humble/lib', 'BROWSER': '/home/agribot/.vscode-server/cli/servers/Stable-61b3d0ab13be7dda2389f1d3e60a119c7f660cc3/server/bin/helpers/browser.sh', 'OPENCODE_PROCESS_ROLE': 'worker', 'MOTD_SHOWN': 'pam', 'HOME': '/home/agribot', 'OLDPWD': '/home/agribot', 'TERM_PROGRAM_VERSION': '1.110.1', 'VSCODE_IPC_HOOK_CLI': '/run/user/1000/vscode-ipc-92f27a87-7a62-4d9f-bf81-93bb2c18c2bb.sock', 'ROS_PYTHON_VERSION': '3', 'VSCODE_GIT_ASKPASS_MAIN': '/home/agribot/.vscode-server/cli/servers/Stable-61b3d0ab13be7dda2389f1d3e60a119c7f660cc3/server/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/home/agribot/.vscode-server/cli/servers/Stable-61b3d0ab13be7dda2389f1d3e60a119c7f660cc3/server/node', 'OPENCODE_RUN_ID': '5b99adf1-240f-42b4-8996-57980a13a203', 'VSCODE_PYTHON_AUTOACTIVATE_GUARD': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'COLCON_PREFIX_PATH': '/home/agribot/agribot-ros2-v2/install', 'ROS_DISTRO': 'humble', 'LOGNAME': 'agribot', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '1', 'ROS_LOCALHOST_ONLY': '0', 'OPENCODE': '1', 'PATH': '/home/agribot/.opencode/bin:/home/agribot/.vscode-server/cli/servers/Stable-61b3d0ab13be7dda2389f1d3e60a119c7f660cc3/server/bin/remote-cli:/home/agribot/.local/bin:/home/agribot/.opencode/bin:/opt/ros/humble/bin:/home/agribot/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', '_ble_util_fdlist_cloexec': '', 'XDG_RUNTIME_DIR': '/run/user/1000', 'OPENCODE_PID': '2338', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-540219a704.sock', 'TERM_PROGRAM': 'vscode', 'AMENT_PREFIX_PATH': '/home/agribot/agribot-ros2-v2/install/agribot_web:/opt/ros/humble', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'LINENO': '1', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'bleopt_connect_tty': '1', 'PWD': '/home/agribot/agribot-ros2-v2/build/agribot_web', 'LC_ALL': 'en_US.UTF-8', 'SSH_CONNECTION': '192.168.0.102 60086 192.168.0.101 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', '_ble_util_fdvars_export': '', 'PYTHONPATH': '/home/agribot/agribot-ros2-v2/build/agribot_web/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages:/home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1'}, 'shell': False}
+[4.522000] (-) TimerEvent: {}
+[4.622457] (-) TimerEvent: {}
+[4.722925] (-) TimerEvent: {}
+[4.823435] (-) TimerEvent: {}
+[4.923897] (-) TimerEvent: {}
+[5.024403] (-) TimerEvent: {}
+[5.124817] (-) TimerEvent: {}
+[5.225286] (-) TimerEvent: {}
+[5.325721] (-) TimerEvent: {}
+[5.426090] (-) TimerEvent: {}
+[5.526516] (-) TimerEvent: {}
+[5.626972] (-) TimerEvent: {}
+[5.727425] (-) TimerEvent: {}
+[5.827891] (-) TimerEvent: {}
+[5.830537] (agribot_web) StdoutLine: {'line': b'running egg_info\n'}
+[5.833463] (agribot_web) StdoutLine: {'line': b'writing ../build/agribot_web/agribot_web.egg-info/PKG-INFO\n'}
+[5.834611] (agribot_web) StdoutLine: {'line': b'writing dependency_links to ../build/agribot_web/agribot_web.egg-info/dependency_links.txt\n'}
+[5.835786] (agribot_web) StdoutLine: {'line': b'writing entry points to ../build/agribot_web/agribot_web.egg-info/entry_points.txt\n'}
+[5.837393] (agribot_web) StdoutLine: {'line': b'writing requirements to ../build/agribot_web/agribot_web.egg-info/requires.txt\n'}
+[5.838487] (agribot_web) StdoutLine: {'line': b'writing top-level names to ../build/agribot_web/agribot_web.egg-info/top_level.txt\n'}
+[5.845907] (agribot_web) StdoutLine: {'line': b"reading manifest file '../build/agribot_web/agribot_web.egg-info/SOURCES.txt'\n"}
+[5.851492] (agribot_web) StdoutLine: {'line': b"writing manifest file '../build/agribot_web/agribot_web.egg-info/SOURCES.txt'\n"}
+[5.853928] (agribot_web) StdoutLine: {'line': b'running build\n'}
+[5.854658] (agribot_web) StdoutLine: {'line': b'running build_py\n'}
+[5.857865] (agribot_web) StdoutLine: {'line': b'running install\n'}
+[5.859961] (agribot_web) StdoutLine: {'line': b'running install_lib\n'}
+[5.867663] (agribot_web) StdoutLine: {'line': b'running install_data\n'}
+[5.868963] (agribot_web) StdoutLine: {'line': b'copying launch/agribot_web.launch.py -> /home/agribot/agribot-ros2-v2/install/agribot_web/share/agribot_web/launch\n'}
+[5.870015] (agribot_web) StdoutLine: {'line': b'running install_egg_info\n'}
+[5.880097] (agribot_web) StdoutLine: {'line': b"removing '/home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web-1.0.0-py3.10.egg-info' (and everything under it)\n"}
+[5.882844] (agribot_web) StdoutLine: {'line': b'Copying ../build/agribot_web/agribot_web.egg-info to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web-1.0.0-py3.10.egg-info\n'}
+[5.895239] (agribot_web) StdoutLine: {'line': b'running install_scripts\n'}
+[5.928059] (-) TimerEvent: {}
+[5.994701] (agribot_web) StdoutLine: {'line': b'Installing sensor_logger script to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/agribot_web\n'}
+[5.996083] (agribot_web) StdoutLine: {'line': b'Installing web_server script to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/agribot_web\n'}
+[5.998900] (agribot_web) StdoutLine: {'line': b"writing list of installed files to '/home/agribot/agribot-ros2-v2/build/agribot_web/install.log'\n"}
+[6.028442] (-) TimerEvent: {}
+[6.129225] (-) TimerEvent: {}
+[6.144188] (agribot_web) CommandEnded: {'returncode': 0}
+[6.224802] (agribot_web) JobEnded: {'identifier': 'agribot_web', 'rc': 0}
+[6.227910] (-) EventReactorShutdown: {}

@@ -231,7 +231,8 @@ public:
     static void hardwareTask(void* param) {
         DriveNode* self = static_cast<DriveNode*>(param);
         TickType_t last_sonar = xTaskGetTickCount();
-        const TickType_t sonar_interval = pdMS_TO_TICKS(100); // 10 Hz
+        const TickType_t sonar_interval = pdMS_TO_TICKS(50); // 20 Hz total, 10 Hz per sensor
+        bool ping_front = true;
 
         for (;;) {
             // --- Watchdog: brake if cmd_vel stale ---
@@ -243,23 +244,26 @@ public:
                 self->motor_right_.setSpeed(self->target_right_speed_);
             }
 
-            // --- Sonar reads at ~10 Hz (non-blocking to motor loop) ---
+            // --- Sonar reads (alternating to prevent echo overlap) ---
             if ((xTaskGetTickCount() - last_sonar) >= sonar_interval) {
                 last_sonar = xTaskGetTickCount();
 
-                float d_front = self->sonar_front_.readDistanceMetres();
-                float d_rear  = self->sonar_rear_.readDistanceMetres();
-
-                self->fillRangeMsg(self->msg_sonar_front_, d_front,
-                                   "sonar_front_link");
-                self->fillRangeMsg(self->msg_sonar_rear_, d_rear,
-                                   "sonar_rear_link");
-
-                if (xSemaphoreTake(self->ros_mutex_, pdMS_TO_TICKS(50))) {
-                    rcl_publish(&self->pub_sonar_front_, &self->msg_sonar_front_, NULL);
-                    rcl_publish(&self->pub_sonar_rear_, &self->msg_sonar_rear_, NULL);
-                    xSemaphoreGive(self->ros_mutex_);
+                if (ping_front) {
+                    float d_front = self->sonar_front_.readDistanceMetres();
+                    self->fillRangeMsg(self->msg_sonar_front_, d_front, "sonar_front_link");
+                    if (xSemaphoreTake(self->ros_mutex_, pdMS_TO_TICKS(10))) {
+                        rcl_publish(&self->pub_sonar_front_, &self->msg_sonar_front_, NULL);
+                        xSemaphoreGive(self->ros_mutex_);
+                    }
+                } else {
+                    float d_rear = self->sonar_rear_.readDistanceMetres();
+                    self->fillRangeMsg(self->msg_sonar_rear_, d_rear, "sonar_rear_link");
+                    if (xSemaphoreTake(self->ros_mutex_, pdMS_TO_TICKS(10))) {
+                        rcl_publish(&self->pub_sonar_rear_, &self->msg_sonar_rear_, NULL);
+                        xSemaphoreGive(self->ros_mutex_);
+                    }
                 }
+                ping_front = !ping_front;
             }
 
             vTaskDelay(pdMS_TO_TICKS(10));
@@ -377,13 +381,30 @@ private:
         // We need access to the singleton; stored in a file-scope ptr.
         extern DriveNode* g_drive_node;
 
-        float lin = twist->linear.x;
+        // Invert linear.x to fix forward/backward being reversed, as requested by user
+        float lin = -twist->linear.x;
         float ang = twist->angular.z;
 
-        // Differential drive: v_left  = lin - ang * (base/2)
-        //                     v_right = lin + ang * (base/2)
-        float v_left  = lin - ang * (WHEEL_BASE / 2.0f);
-        float v_right = lin + ang * (WHEEL_BASE / 2.0f);
+        float v_left = 0.0f;
+        float v_right = 0.0f;
+
+        // Simple turn logic to overcome friction: max-power turn when purely turning
+        if (abs(ang) > 0.1f && abs(lin) < 0.1f) {
+            if (ang > 0.0f) {
+                // Turn Left
+                v_left = -MAX_LINEAR_VEL;
+                v_right = MAX_LINEAR_VEL;
+            } else {
+                // Turn Right
+                v_left = MAX_LINEAR_VEL;
+                v_right = -MAX_LINEAR_VEL;
+            }
+        } else {
+            // Normal Differential drive: v_left  = lin - ang * (base/2)
+            //                            v_right = lin + ang * (base/2)
+            v_left  = lin - ang * (WHEEL_BASE / 2.0f);
+            v_right = lin + ang * (WHEEL_BASE / 2.0f);
+        }
 
         // Map velocity → PWM
         g_drive_node->target_left_speed_  =

@@ -135,16 +135,16 @@ public:
                 float t = self->dht_.readTemperature();
                 float h = self->dht_.readHumidity();
 
-                if (!isnan(t)) {
+                if (isnan(t) || isnan(h)) {
+                    Serial.println("[payload] DHT read failed (NaN)!");
+                } else {
                     self->last_temperature_ = t;
                     self->fillTemperatureMsg(self->msg_temp_, t);
                     if (xSemaphoreTake(self->ros_mutex_, pdMS_TO_TICKS(50))) {
                         rcl_publish(&self->pub_temperature_, &self->msg_temp_, NULL);
                         xSemaphoreGive(self->ros_mutex_);
                     }
-                }
 
-                if (!isnan(h)) {
                     self->last_humidity_ = h;
                     self->fillHumidityMsg(self->msg_hum_, h);
                     if (xSemaphoreTake(self->ros_mutex_, pdMS_TO_TICKS(50))) {
@@ -276,6 +276,13 @@ private:
             "cmd_servo");
         if (rc != RCL_RET_OK) { Serial.println("[payload] sub servo fail"); return false; }
 
+        // Subscriber: /cmd_switch
+        rc = rclc_subscription_init_default(
+            &sub_switch_, &node_,
+            ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+            "cmd_switch");
+        if (rc != RCL_RET_OK) { Serial.println("[payload] sub switch fail"); return false; }
+
         // Service: /srv/read_moisture  (std_srvs/Trigger)
         rc = rclc_service_init_default(
             &srv_moisture_, &node_,
@@ -283,15 +290,20 @@ private:
             "srv/read_moisture");
         if (rc != RCL_RET_OK) { Serial.println("[payload] srv moisture fail"); return false; }
 
-        // Executor – 1 subscription + 1 service = 2 handles
+        // Executor – 2 subscriptions + 1 service = 3 handles
         rc = rclc_executor_init(&executor_, &support_.context,
-                                2, &allocator_);
+                                3, &allocator_);
         if (rc != RCL_RET_OK) { Serial.println("[payload] exec init fail"); return false; }
 
         rc = rclc_executor_add_subscription(
             &executor_, &sub_servo_, &msg_servo_,
             &PayloadNode::servoCallback, ON_NEW_DATA);
         if (rc != RCL_RET_OK) { Serial.println("[payload] exec sub fail"); return false; }
+
+        rc = rclc_executor_add_subscription(
+            &executor_, &sub_switch_, &msg_switch_,
+            &PayloadNode::switchCallback, ON_NEW_DATA);
+        if (rc != RCL_RET_OK) { Serial.println("[payload] exec switch sub fail"); return false; }
 
         rc = rclc_executor_add_service(
             &executor_, &srv_moisture_,
@@ -311,6 +323,26 @@ private:
         extern PayloadNode* g_payload_node;
         g_payload_node->target_servo_angle_ = msg->data;
         g_payload_node->servo_needs_update_ = true;
+    }
+
+    // ── cmd_switch callback ──────────────────────────────────────────
+    static void switchCallback(const void* msg_in) {
+        const std_msgs__msg__Int32* msg =
+            static_cast<const std_msgs__msg__Int32*>(msg_in);
+
+        int data = msg->data;
+        int switch_id = data / 10;
+        int state = data % 10;
+        
+        int pin = -1;
+        if (switch_id == 1) pin = PIN_SW1;
+        else if (switch_id == 2) pin = PIN_SW2;
+        else if (switch_id == 3) pin = PIN_SW3;
+        
+        if (pin != -1) {
+            digitalWrite(pin, state ? HIGH : LOW);
+            Serial.printf("[payload] Switch %d -> %d\n", switch_id, state);
+        }
     }
 
     // ── Soil moisture service callback ───────────────────────────────
@@ -390,6 +422,7 @@ private:
     rcl_publisher_t       pub_temperature_;
     rcl_publisher_t       pub_humidity_;
     rcl_subscription_t    sub_servo_;
+    rcl_subscription_t    sub_switch_;
     rcl_service_t         srv_moisture_;
     rclc_executor_t       executor_;
 
@@ -397,6 +430,7 @@ private:
     sensor_msgs__msg__Temperature       msg_temp_;
     sensor_msgs__msg__RelativeHumidity  msg_hum_;
     std_msgs__msg__Int32                msg_servo_;
+    std_msgs__msg__Int32                msg_switch_;
     std_srvs__srv__Trigger_Request      srv_req_;
     std_srvs__srv__Trigger_Response     srv_res_;
 };

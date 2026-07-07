@@ -26,7 +26,9 @@ setup(
     entry_points={
         'console_scripts': [
             'sensor_logger = agribot_web.sensor_logger:main',
+            'synthetic_moisture_node = agribot_web.synthetic_moisture_node:main',
             'web_server = agribot_web.web_server:main',
+            'obstacle_avoidance = agribot_web.obstacle_avoidance:main',
         ],
     },
 )

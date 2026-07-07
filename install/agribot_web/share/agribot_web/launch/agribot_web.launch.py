@@ -36,6 +36,14 @@ def generate_launch_description():
             output='screen',
         ),
 
+        # Obstacle avoidance node
+        Node(
+            package='agribot_web',
+            executable='obstacle_avoidance',
+            name='obstacle_avoidance',
+            output='screen',
+        ),
+
         # 3. web_server – FastAPI (serves frontend + REST API on port 8080)
         ExecuteProcess(
             cmd=['python3', '-m', 'agribot_web.web_server'],

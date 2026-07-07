@@ -50,12 +50,12 @@ export const Control: React.FC = () => {
   }, []);
 
   // ------------------------------------------------------------------
-  //  Motor control: publish geometry_msgs/Twist to /cmd_vel
+  //  Motor control: publish geometry_msgs/Twist to /cmd_vel_teleop
   // ------------------------------------------------------------------
 
   const sendTwist = useCallback(
     (linear: number, angular: number) => {
-      publishMessage('cmd_vel', 'geometry_msgs/msg/Twist', {
+      publishMessage('/agribot/cmd_vel_teleop', 'geometry_msgs/msg/Twist', {
         linear: { x: linear, y: 0.0, z: 0.0 },
         angular: { x: 0.0, y: 0.0, z: angular },
       });
@@ -74,7 +74,7 @@ export const Control: React.FC = () => {
   // ------------------------------------------------------------------
 
   const sendServo = useCallback((angle: number) => {
-    publishMessage('cmd_servo', 'std_msgs/msg/Int32', { data: angle });
+    publishMessage('/agribot/cmd_servo', 'std_msgs/msg/Int32', { data: angle });
   }, []);
 
   // ------------------------------------------------------------------
@@ -86,7 +86,7 @@ export const Control: React.FC = () => {
     setSoilResult(null);
     try {
       const res = await callService<Record<string, never>, { success: boolean; message: string }>(
-        'srv/read_moisture',
+        '/agribot/srv/read_moisture',
         'std_srvs/srv/Trigger',
         {},
       );
@@ -99,6 +99,7 @@ export const Control: React.FC = () => {
           await postMoistureReading({
             raw: parsed.raw,
             percent: parsed.percent,
+            ph: parsed.ph !== undefined ? parsed.ph : 7.0,
           });
         }
       } catch {
@@ -109,6 +110,13 @@ export const Control: React.FC = () => {
     } finally {
       setSoilLoading(false);
     }
+  }, []);
+
+  const sendSwitch = useCallback((switchId: number, state: boolean) => {
+    // switchId: 1 (GPIO 21), 2 (GPIO 22), 3 (GPIO 23)
+    // encoding: switchId * 10 + (state ? 1 : 0)
+    // e.g. switch 1 ON = 11, OFF = 10
+    publishMessage('/agribot/cmd_switch', 'std_msgs/msg/Int32', { data: switchId * 10 + (state ? 1 : 0) });
   }, []);
 
   // ------------------------------------------------------------------
@@ -231,6 +239,32 @@ export const Control: React.FC = () => {
             <span>0\u00B0</span>
             <span className="font-bold text-emerald-800">{servoAngle}\u00B0</span>
             <span>180\u00B0</span>
+          </div>
+        </div>
+
+        {/* Reserved Switches */}
+        <div className="w-full mt-6 bg-white p-6 rounded-xl border border-emerald-200 shadow-sm flex flex-col gap-4">
+          <label className="text-emerald-800 font-bold flex items-center gap-2">
+            Reserved Momentary Outputs (GPIO 21, 22, 23)
+          </label>
+          <div className="flex justify-around gap-4 mt-2">
+            {[
+              { id: 1, label: 'Pump' },
+              { id: 2, label: 'Saw' },
+              { id: 3, label: 'Probe' }
+            ].map(({ id, label }) => (
+              <button
+                key={id}
+                onMouseDown={() => sendSwitch(id, true)}
+                onMouseUp={() => sendSwitch(id, false)}
+                onMouseLeave={() => sendSwitch(id, false)}
+                onTouchStart={(e) => { e.preventDefault(); sendSwitch(id, true); }}
+                onTouchEnd={(e) => { e.preventDefault(); sendSwitch(id, false); }}
+                className="w-24 h-24 bg-emerald-100 hover:bg-emerald-500 text-emerald-800 hover:text-white rounded-2xl shadow-md flex flex-col items-center justify-center transition-all duration-150 active:scale-95 active:bg-emerald-600 font-bold"
+              >
+                <span className="capitalize">{label}</span>
+              </button>
+            ))}
           </div>
         </div>
 

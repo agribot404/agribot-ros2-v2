@@ -1,0 +1,27 @@
+[5.048s] Invoking command in '/home/agribot/agribot-ros2-v2/agribot_web': PYTHONPATH=/home/agribot/agribot-ros2-v2/build/agribot_web/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/agribot_web build --build-base /home/agribot/agribot-ros2-v2/build/agribot_web/build install --record /home/agribot/agribot-ros2-v2/build/agribot_web/install.log --install-scripts $base/lib/agribot_web --single-version-externally-managed install_data
+[6.608s] running egg_info
+[6.611s] writing ../build/agribot_web/agribot_web.egg-info/PKG-INFO
+[6.612s] writing dependency_links to ../build/agribot_web/agribot_web.egg-info/dependency_links.txt
+[6.613s] writing entry points to ../build/agribot_web/agribot_web.egg-info/entry_points.txt
+[6.614s] writing requirements to ../build/agribot_web/agribot_web.egg-info/requires.txt
+[6.615s] writing top-level names to ../build/agribot_web/agribot_web.egg-info/top_level.txt
+[6.622s] reading manifest file '../build/agribot_web/agribot_web.egg-info/SOURCES.txt'
+[6.627s] writing manifest file '../build/agribot_web/agribot_web.egg-info/SOURCES.txt'
+[6.627s] running build
+[6.628s] running build_py
+[6.629s] copying agribot_web/obstacle_avoidance.py -> /home/agribot/agribot-ros2-v2/build/agribot_web/build/lib/agribot_web
+[6.631s] running install
+[6.632s] running install_lib
+[6.637s] copying /home/agribot/agribot-ros2-v2/build/agribot_web/build/lib/agribot_web/obstacle_avoidance.py -> /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web
+[6.640s] byte-compiling /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web/obstacle_avoidance.py to obstacle_avoidance.cpython-310.pyc
+[6.643s] running install_data
+[6.646s] copying launch/agribot_web.launch.py -> /home/agribot/agribot-ros2-v2/install/agribot_web/share/agribot_web/launch
+[6.647s] running install_egg_info
+[6.654s] removing '/home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web-1.0.0-py3.10.egg-info' (and everything under it)
+[6.657s] Copying ../build/agribot_web/agribot_web.egg-info to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web-1.0.0-py3.10.egg-info
+[6.670s] running install_scripts
+[6.774s] Installing obstacle_avoidance script to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/agribot_web
+[6.775s] Installing sensor_logger script to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/agribot_web
+[6.778s] Installing web_server script to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/agribot_web
+[6.781s] writing list of installed files to '/home/agribot/agribot-ros2-v2/build/agribot_web/install.log'
+[6.938s] Invoked command in '/home/agribot/agribot-ros2-v2/agribot_web' returned '0': PYTHONPATH=/home/agribot/agribot-ros2-v2/build/agribot_web/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/agribot_web build --build-base /home/agribot/agribot-ros2-v2/build/agribot_web/build install --record /home/agribot/agribot-ros2-v2/build/agribot_web/install.log --install-scripts $base/lib/agribot_web --single-version-externally-managed install_data

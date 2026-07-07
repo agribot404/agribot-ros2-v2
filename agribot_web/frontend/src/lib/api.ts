@@ -19,11 +19,25 @@ export interface LogEntry {
   humidity: number | null;
   soil_raw: number | null;
   soil_percent: number | null;
+  ph_level?: number | null;
+  condition?: string | null;
+  chance_of_rain?: number | null;
+  will_it_rain?: number | null;
+  uv_index?: number | null;
+  wind_kph?: number | null;
+  aqi_us_epa?: number | null;
+  aqi_co?: number | null;
+  aqi_no2?: number | null;
+  aqi_o3?: number | null;
+  aqi_so2?: number | null;
+  aqi_pm25?: number | null;
+  aqi_pm10?: number | null;
 }
 
 export interface MoistureReading {
   raw: number;
   percent: number;
+  ph: number;
 }
 
 // ---------------------------------------------------------------------------

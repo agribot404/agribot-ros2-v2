@@ -11,7 +11,7 @@ import {
   BiWifiOff,
 } from 'react-icons/bi';
 import { WiHumidity } from 'react-icons/wi';
-import { subscribeTopic } from '../lib/ros';
+import { subscribeTopic, publishMessage } from '../lib/ros';
 import { fetchLatestLog } from '../lib/api';
 
 // ---------------------------------------------------------------------------
@@ -60,13 +60,21 @@ export const Dashboard: React.FC = () => {
   const [isEditingCam, setIsEditingCam] = useState<boolean>(false);
   const camInputRef = useRef<HTMLInputElement>(null);
 
+  // ---------------------------------------------------------------------------
+  //  Momentary Switches (GPIO 21, 22, 23)
+  // ---------------------------------------------------------------------------
+
+  const sendSwitch = (switchId: number, state: boolean) => {
+    publishMessage('/agribot/cmd_switch', 'std_msgs/msg/Int32', { data: switchId * 10 + (state ? 1 : 0) });
+  };
+
   // ------------------------------------------------------------------
   //  ROS subscriptions (live sensor data)
   // ------------------------------------------------------------------
 
   useEffect(() => {
     const tempTopic = subscribeTopic<{ temperature: number }>(
-      'sensor/dht11_temperature',
+      '/agribot/sensor/dht11/temperature',
       'sensor_msgs/msg/Temperature',
       (msg) => {
         setTemperature(msg.temperature);
@@ -75,14 +83,15 @@ export const Dashboard: React.FC = () => {
     );
 
     const humTopic = subscribeTopic<{ relative_humidity: number }>(
-      'sensor/dht11_humidity',
+      '/agribot/sensor/dht11/humidity',
       'sensor_msgs/msg/RelativeHumidity',
       (msg) => {
-        // micro-ROS publishes 0.0-1.0, display as 0-100 %
-        setHumidity(msg.relative_humidity * 100);
+        setHumidity(msg.relative_humidity * 100); // Convert from 0-1 range to percentage
         setLastSensorUpdate(Date.now());
       },
     );
+
+
 
     return () => {
       tempTopic.unsubscribe();

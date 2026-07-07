@@ -179,7 +179,7 @@ Channels 3-15 are available for future use. On ESP32, channels 0-7 share timer g
 
 6. If it needs ROS 2 exposure, add fields to `SharedState` and create the appropriate publisher/subscriber/service in `MicroROSNode`.
 
-### Activating the Reserved Switches (GPIO 18, 19, 23)
+### Activating the Reserved Switches (GPIO 21, 22, 23)
 
 These are pre-configured as OUTPUT LOW. To expose them to ROS 2:
 

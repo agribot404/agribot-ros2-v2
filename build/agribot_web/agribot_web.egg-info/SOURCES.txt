@@ -9,7 +9,9 @@ setup.py
 ../build/agribot_web/agribot_web.egg-info/top_level.txt
 ../build/agribot_web/agribot_web.egg-info/zip-safe
 agribot_web/__init__.py
+agribot_web/obstacle_avoidance.py
 agribot_web/sensor_logger.py
+agribot_web/synthetic_moisture_node.py
 agribot_web/web_server.py
 launch/agribot_web.launch.py
 resource/agribot_web

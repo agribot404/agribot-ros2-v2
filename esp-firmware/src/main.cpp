@@ -488,9 +488,25 @@ private:
         float linear  = static_cast<float>(twist->linear.x);   // m/s
         float angular = static_cast<float>(twist->angular.z);   // rad/s
 
-        // Differential drive mix (normalised to ±1.0)
-        float left  = constrain(linear - angular, -1.0f, 1.0f);
-        float right = constrain(linear + angular, -1.0f, 1.0f);
+        float left = 0.0f;
+        float right = 0.0f;
+
+        // Simple turn logic to overcome friction: tank-style max-power turn when angular > 0.1 and linear is 0
+        if (abs(angular) > 0.1f && abs(linear) < 0.1f) {
+            if (angular > 0.0f) {
+                // Turn Left (left backwards, right forwards)
+                left = -1.0f;
+                right = 1.0f;
+            } else {
+                // Turn Right (left forwards, right backwards)
+                left = 1.0f;
+                right = -1.0f;
+            }
+        } else {
+            // Normal differential drive for moving forward/backward or arc turning
+            left  = constrain(linear - angular, -1.0f, 1.0f);
+            right = constrain(linear + angular, -1.0f, 1.0f);
+        }
 
         portENTER_CRITICAL(&g_mux);
         g_shared.motor_left_speed  = left;
