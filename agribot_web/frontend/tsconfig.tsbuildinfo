@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./src/roslib.d.ts","./src/vite-env.d.ts","./src/components/Layout.tsx","./src/components/Navbar.tsx","./src/lib/api.ts","./src/lib/ros.ts","./src/pages/Control.tsx","./src/pages/Dashboard.tsx","./src/pages/Logs.tsx"],"version":"5.9.3"}

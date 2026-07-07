@@ -1,0 +1,45 @@
+[4.040s] Invoking command in '/home/agribot/agribot-ros2-v2/agribot_web': PYTHONPATH=/home/agribot/agribot-ros2-v2/build/agribot_web/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/agribot_web build --build-base /home/agribot/agribot-ros2-v2/build/agribot_web/build install --record /home/agribot/agribot-ros2-v2/build/agribot_web/install.log --single-version-externally-managed install_data
+[5.350s] running egg_info
+[5.353s] creating ../build/agribot_web/agribot_web.egg-info
+[5.355s] writing ../build/agribot_web/agribot_web.egg-info/PKG-INFO
+[5.356s] writing dependency_links to ../build/agribot_web/agribot_web.egg-info/dependency_links.txt
+[5.359s] writing entry points to ../build/agribot_web/agribot_web.egg-info/entry_points.txt
+[5.360s] writing requirements to ../build/agribot_web/agribot_web.egg-info/requires.txt
+[5.361s] writing top-level names to ../build/agribot_web/agribot_web.egg-info/top_level.txt
+[5.362s] writing manifest file '../build/agribot_web/agribot_web.egg-info/SOURCES.txt'
+[5.374s] reading manifest file '../build/agribot_web/agribot_web.egg-info/SOURCES.txt'
+[5.378s] writing manifest file '../build/agribot_web/agribot_web.egg-info/SOURCES.txt'
+[5.378s] running build
+[5.382s] running build_py
+[5.384s] creating /home/agribot/agribot-ros2-v2/build/agribot_web/build
+[5.385s] creating /home/agribot/agribot-ros2-v2/build/agribot_web/build/lib
+[5.386s] creating /home/agribot/agribot-ros2-v2/build/agribot_web/build/lib/agribot_web
+[5.386s] copying agribot_web/__init__.py -> /home/agribot/agribot-ros2-v2/build/agribot_web/build/lib/agribot_web
+[5.387s] copying agribot_web/sensor_logger.py -> /home/agribot/agribot-ros2-v2/build/agribot_web/build/lib/agribot_web
+[5.387s] copying agribot_web/web_server.py -> /home/agribot/agribot-ros2-v2/build/agribot_web/build/lib/agribot_web
+[5.388s] running install
+[5.388s] running install_lib
+[5.391s] creating /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web
+[5.391s] copying /home/agribot/agribot-ros2-v2/build/agribot_web/build/lib/agribot_web/__init__.py -> /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web
+[5.392s] copying /home/agribot/agribot-ros2-v2/build/agribot_web/build/lib/agribot_web/sensor_logger.py -> /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web
+[5.393s] copying /home/agribot/agribot-ros2-v2/build/agribot_web/build/lib/agribot_web/web_server.py -> /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web
+[5.396s] byte-compiling /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web/__init__.py to __init__.cpython-310.pyc
+[5.397s] byte-compiling /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web/sensor_logger.py to sensor_logger.cpython-310.pyc
+[5.401s] byte-compiling /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web/web_server.py to web_server.cpython-310.pyc
+[5.405s] running install_data
+[5.407s] creating /home/agribot/agribot-ros2-v2/install/agribot_web/share
+[5.408s] creating /home/agribot/agribot-ros2-v2/install/agribot_web/share/ament_index
+[5.411s] creating /home/agribot/agribot-ros2-v2/install/agribot_web/share/ament_index/resource_index
+[5.412s] creating /home/agribot/agribot-ros2-v2/install/agribot_web/share/ament_index/resource_index/packages
+[5.412s] copying resource/agribot_web -> /home/agribot/agribot-ros2-v2/install/agribot_web/share/ament_index/resource_index/packages
+[5.413s] creating /home/agribot/agribot-ros2-v2/install/agribot_web/share/agribot_web
+[5.413s] copying package.xml -> /home/agribot/agribot-ros2-v2/install/agribot_web/share/agribot_web
+[5.414s] creating /home/agribot/agribot-ros2-v2/install/agribot_web/share/agribot_web/launch
+[5.414s] copying launch/agribot_web.launch.py -> /home/agribot/agribot-ros2-v2/install/agribot_web/share/agribot_web/launch
+[5.415s] running install_egg_info
+[5.420s] Copying ../build/agribot_web/agribot_web.egg-info to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages/agribot_web-1.0.0-py3.10.egg-info
+[5.426s] running install_scripts
+[5.530s] Installing sensor_logger script to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/agribot_web
+[5.530s] Installing web_server script to /home/agribot/agribot-ros2-v2/install/agribot_web/lib/agribot_web
+[5.532s] writing list of installed files to '/home/agribot/agribot-ros2-v2/build/agribot_web/install.log'
+[5.690s] Invoked command in '/home/agribot/agribot-ros2-v2/agribot_web' returned '0': PYTHONPATH=/home/agribot/agribot-ros2-v2/build/agribot_web/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/agribot/agribot-ros2-v2/install/agribot_web/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/agribot_web build --build-base /home/agribot/agribot-ros2-v2/build/agribot_web/build install --record /home/agribot/agribot-ros2-v2/build/agribot_web/install.log --single-version-externally-managed install_data

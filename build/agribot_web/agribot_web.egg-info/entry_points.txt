@@ -1,0 +1,4 @@
+[console_scripts]
+sensor_logger = agribot_web.sensor_logger:main
+web_server = agribot_web.web_server:main
+

@@ -1,0 +1,9 @@
+
+> agribot-dashboard@2.0.0 dev
+> vite --host
+
+
+  VITE v7.3.5  ready in 1324 ms
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://192.168.31.157:5173/

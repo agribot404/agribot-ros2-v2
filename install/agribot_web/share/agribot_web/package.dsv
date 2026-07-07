@@ -1,0 +1,6 @@
+source;share/agribot_web/hook/pythonpath.ps1
+source;share/agribot_web/hook/pythonpath.dsv
+source;share/agribot_web/hook/pythonpath.sh
+source;share/agribot_web/hook/ament_prefix_path.ps1
+source;share/agribot_web/hook/ament_prefix_path.dsv
+source;share/agribot_web/hook/ament_prefix_path.sh
