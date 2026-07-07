@@ -152,20 +152,21 @@ class LogEntry(BaseModel):
 #  FastAPI app
 # ---------------------------------------------------------------------------
 
-app = FastAPI(title='AgriBot Web API', version='1.0.0')
+from contextlib import asynccontextmanager
 
-# Allow the Vite dev server (port 5173) during development
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    _ensure_db()
+    yield
+
+app = FastAPI(title='AgriBot Web API', version='1.0.0', lifespan=lifespan)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=['*'],
     allow_methods=['*'],
     allow_headers=['*'],
 )
-
-
-@app.on_event('startup')
-def on_startup():
-    _ensure_db()
 
 
 # ---------------------------------------------------------------------------
