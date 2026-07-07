@@ -60,20 +60,20 @@ All firmwares are built using **PlatformIO** and the Arduino framework.
 ### Flashing the Drive Node
 ```bash
 cd esp-drive-node
-pio run -t upload
+~/.platformio/penv/bin/pio run -t upload
 ```
 
 ### Flashing the Payload Node
 ```bash
 cd esp-payload-node
-pio run -t upload
+~/.platformio/penv/bin/pio run -t upload
 ```
 
 ### Flashing the Camera Node (ESP32-CAM)
 The ESP32-CAM requires an FTDI programmer. Connect `GPIO 0` to `GND` before powering it on to enter Download Mode.
 ```bash
 cd esp-cam-node
-pio run -t upload
+~/.platformio/penv/bin/pio run -t upload
 ```
 *Note: After flashing, remove the jumper from GPIO 0 and press the RESET button to start the stream.*
 
