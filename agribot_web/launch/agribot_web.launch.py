@@ -5,6 +5,7 @@ Starts:
     1. rosbridge_server       (WebSocket bridge on port 9090)
     2. sensor_logger          (ROS 2 node → SQLite)
     3. web_server             (FastAPI on port 8080)
+    4. micro_ros_agent        (Docker container on UDP port 8888)
 """
 
 from launch import LaunchDescription
@@ -39,6 +40,13 @@ def generate_launch_description():
         ExecuteProcess(
             cmd=['python3', '-m', 'agribot_web.web_server'],
             name='web_server',
+            output='screen',
+        ),
+
+        # 4. micro_ros_agent – Docker container for ESP32 micro-ROS nodes
+        ExecuteProcess(
+            cmd=['docker', 'run', '--rm', '--net=host', 'microros/micro-ros-agent:humble', 'udp4', '--port', '8888'],
+            name='micro_ros_agent',
             output='screen',
         ),
     ])
