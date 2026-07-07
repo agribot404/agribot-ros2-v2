@@ -120,6 +120,7 @@ public:
     }
 
 private:
+    SemaphoreHandle_t ros_mutex_;
     gpio_num_t pin_en_, pin_fwd_, pin_rev_;
     uint8_t    pwm_ch_;
 };
@@ -160,6 +161,7 @@ public:
     float lastDistance() const { return distance_m_; }
 
 private:
+    SemaphoreHandle_t ros_mutex_;
     gpio_num_t pin_trig_, pin_echo_;
     volatile float distance_m_;
 };
@@ -185,6 +187,7 @@ public:
     pinMode(BLUE_LED, OUTPUT);
         delay(500);
         Serial.println("[drive] Booting...");
+        ros_mutex_ = xSemaphoreCreateMutex();
 
         // 1. Connect WiFi
         if (!connectWiFi()) return false;
@@ -216,7 +219,10 @@ public:
     static void rosSpinTask(void* param) {
         DriveNode* self = static_cast<DriveNode*>(param);
         for (;;) {
-            rclc_executor_spin_some(&self->executor_, RCL_MS_TO_NS(10));
+            if (xSemaphoreTake(self->ros_mutex_, pdMS_TO_TICKS(50))) {
+                rclc_executor_spin_some(&self->executor_, RCL_MS_TO_NS(10));
+                xSemaphoreGive(self->ros_mutex_);
+            }
             vTaskDelay(pdMS_TO_TICKS(5));
         }
     }
@@ -249,10 +255,11 @@ public:
                 self->fillRangeMsg(self->msg_sonar_rear_, d_rear,
                                    "sonar_rear_link");
 
-                rcl_publish(&self->pub_sonar_front_,
-                            &self->msg_sonar_front_, NULL);
-                rcl_publish(&self->pub_sonar_rear_,
-                            &self->msg_sonar_rear_, NULL);
+                if (xSemaphoreTake(self->ros_mutex_, pdMS_TO_TICKS(50))) {
+                    rcl_publish(&self->pub_sonar_front_, &self->msg_sonar_front_, NULL);
+                    rcl_publish(&self->pub_sonar_rear_, &self->msg_sonar_rear_, NULL);
+                    xSemaphoreGive(self->ros_mutex_);
+                }
             }
 
             vTaskDelay(pdMS_TO_TICKS(10));
@@ -268,6 +275,7 @@ public:
     }
 
 private:
+    SemaphoreHandle_t ros_mutex_;
     // ── WiFi ─────────────────────────────────────────────────────────
     bool connectWiFi() {
         WiFi.mode(WIFI_STA);
@@ -360,10 +368,9 @@ private:
     }
 
     // ── cmd_vel callback (runs on Core 0 via executor) ───────────────
-    static void cmdVelCallback(const void* msg_in, void* context) {
+    static void cmdVelCallback(const void* msg_in) {
         // NOTE: rclc calls this with context == NULL by default.
         //       We recover `this` from the static instance below.
-        (void)context;
         const geometry_msgs__msg__Twist* twist =
             static_cast<const geometry_msgs__msg__Twist*>(msg_in);
 

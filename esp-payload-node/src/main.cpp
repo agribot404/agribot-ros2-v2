@@ -84,6 +84,7 @@ public:
     pinMode(BLUE_LED, OUTPUT);
         delay(500);
         Serial.println("[payload] Booting...");
+        ros_mutex_ = xSemaphoreCreateMutex();
 
         // 1. Connect WiFi
         if (!connectWiFi()) return false;
@@ -111,7 +112,10 @@ public:
     static void rosSpinTask(void* param) {
         PayloadNode* self = static_cast<PayloadNode*>(param);
         for (;;) {
-            rclc_executor_spin_some(&self->executor_, RCL_MS_TO_NS(10));
+            if (xSemaphoreTake(self->ros_mutex_, pdMS_TO_TICKS(50))) {
+                rclc_executor_spin_some(&self->executor_, RCL_MS_TO_NS(10));
+                xSemaphoreGive(self->ros_mutex_);
+            }
             vTaskDelay(pdMS_TO_TICKS(5));
         }
     }
@@ -134,13 +138,19 @@ public:
                 if (!isnan(t)) {
                     self->last_temperature_ = t;
                     self->fillTemperatureMsg(self->msg_temp_, t);
-                    rcl_publish(&self->pub_temperature_, &self->msg_temp_, NULL);
+                    if (xSemaphoreTake(self->ros_mutex_, pdMS_TO_TICKS(50))) {
+                        rcl_publish(&self->pub_temperature_, &self->msg_temp_, NULL);
+                        xSemaphoreGive(self->ros_mutex_);
+                    }
                 }
 
                 if (!isnan(h)) {
                     self->last_humidity_ = h;
                     self->fillHumidityMsg(self->msg_hum_, h);
-                    rcl_publish(&self->pub_humidity_, &self->msg_hum_, NULL);
+                    if (xSemaphoreTake(self->ros_mutex_, pdMS_TO_TICKS(50))) {
+                        rcl_publish(&self->pub_humidity_, &self->msg_hum_, NULL);
+                        xSemaphoreGive(self->ros_mutex_);
+                    }
                 }
             }
 
@@ -166,6 +176,7 @@ public:
     }
 
 private:
+    SemaphoreHandle_t ros_mutex_;
     // ── WiFi ─────────────────────────────────────────────────────────
     bool connectWiFi() {
         WiFi.mode(WIFI_STA);

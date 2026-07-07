@@ -1,31 +1,20 @@
-[INFO] [launch]: All log files can be found below /home/agribot/.ros/log/2026-07-07-10-53-25-915115-agripi-61283
+[INFO] [launch]: All log files can be found below /home/agribot/.ros/log/2026-07-07-11-54-50-500002-agripi-11972
 [INFO] [launch]: Default logging verbosity is set to INFO
-[INFO] [rosbridge_websocket-1]: process started with pid [61299]
-[INFO] [sensor_logger-2]: process started with pid [61301]
-[INFO] [web_server-3]: process started with pid [61303]
-[INFO] [micro_ros_agent-4]: process started with pid [61305]
-[sensor_logger-2] [INFO] [1783400008.208868616] [sensor_logger]: SQLite database ready at /home/agribot/.agribot/history.db
-[sensor_logger-2] [INFO] [1783400008.464956688] [sensor_logger]: SensorLogger node started – waiting for DHT11 data
-[web_server-3] INFO:     Started server process [61303]
+[INFO] [rosbridge_websocket-1]: process started with pid [11973]
+[INFO] [sensor_logger-2]: process started with pid [11975]
+[INFO] [web_server-3]: process started with pid [11977]
+[INFO] [micro_ros_agent-4]: process started with pid [11979]
+[web_server-3] INFO:     Started server process [11977]
 [web_server-3] INFO:     Waiting for application startup.
 [web_server-3] INFO:     Application startup complete.
 [web_server-3] INFO:     Uvicorn running on http://0.0.0.0:8080 (Press CTRL+C to quit)
-[rosbridge_websocket-1] [WARN] [1783400009.643734949] [rosbridge_websocket]: The 'default_call_service_timeout' parameter is currently set to 0.0, which means service calls will block indefinitely if no response is received. Please note that in the Jazzy and later releases, the default value for this parameter will be updated to 5.0 seconds.
-[rosbridge_websocket-1] [WARN] [1783400009.647931887] [rosbridge_websocket]: The 'call_services_in_new_thread' parameter is currently set to False, which means service calls will block the main thread. Please note that in the Jazzy and later releases, the default value for this parameter will be updated to True.
-[rosbridge_websocket-1] [WARN] [1783400009.651832199] [rosbridge_websocket]: The 'send_action_goals_in_new_thread' parameter is currently set to False, which means sending action goals will block the main thread. Please note that in the Jazzy and later releases, the default value for this parameter will be updated to True.
-[rosbridge_websocket-1] [INFO] [1783400009.664841434] [rosbridge_websocket]: Rosbridge WebSocket server started on port 9090
-[micro_ros_agent-4] [35m[1783400009.981617][m info     | [34mUDPv4AgentLinux.cpp[m | [37minit                    [m | [32mrunning...[m             | port: 8888
-[micro_ros_agent-4] [35m[1783400009.983519][m info     | [34mRoot.cpp          [m | [37mset_verbose_level       [m | [32mlogger setup[m           | verbose_level: 4
-[micro_ros_agent-4] [35m[1783400010.340306][m info     | [34mRoot.cpp          [m | [37mcreate_client           [m | [32mcreate[m                 | client_key: 0x6F79CA20, session_id: 0x81
-[micro_ros_agent-4] [35m[1783400010.342608][m info     | [34mSessionManager.hpp[m | [37mestablish_session       [m | [32msession established[m    | client_key: 0x6F79CA20, address: 192.168.0.109:47138
-[micro_ros_agent-4] [35m[1783400010.706504][m info     | [34mProxyClient.cpp   [m | [37mcreate_participant      [m | [32mparticipant created[m    | client_key: 0x6F79CA20, participant_id: 0x000(1)
-[micro_ros_agent-4] [35m[1783400010.739165][m info     | [34mProxyClient.cpp   [m | [37mcreate_topic            [m | [32mtopic created[m          | client_key: 0x6F79CA20, topic_id: 0x000(2), participant_id: 0x000(1)
-[micro_ros_agent-4] [35m[1783400010.756648][m info     | [34mProxyClient.cpp   [m | [37mcreate_publisher        [m | [32mpublisher created[m      | client_key: 0x6F79CA20, publisher_id: 0x000(3), participant_id: 0x000(1)
-[micro_ros_agent-4] [35m[1783400010.768762][m info     | [34mProxyClient.cpp   [m | [37mcreate_datawriter       [m | [32mdatawriter created[m     | client_key: 0x6F79CA20, datawriter_id: 0x000(5), publisher_id: 0x000(3)
-[micro_ros_agent-4] [35m[1783400010.781412][m info     | [34mProxyClient.cpp   [m | [37mcreate_topic            [m | [32mtopic created[m          | client_key: 0x6F79CA20, topic_id: 0x001(2), participant_id: 0x000(1)
-[micro_ros_agent-4] [35m[1783400010.797066][m info     | [34mProxyClient.cpp   [m | [37mcreate_publisher        [m | [32mpublisher created[m      | client_key: 0x6F79CA20, publisher_id: 0x001(3), participant_id: 0x000(1)
-[micro_ros_agent-4] [35m[1783400010.813157][m info     | [34mProxyClient.cpp   [m | [37mcreate_datawriter       [m | [32mdatawriter created[m     | client_key: 0x6F79CA20, datawriter_id: 0x001(5), publisher_id: 0x001(3)
-[micro_ros_agent-4] [35m[1783400010.832140][m info     | [34mProxyClient.cpp   [m | [37mcreate_topic            [m | [32mtopic created[m          | client_key: 0x6F79CA20, topic_id: 0x002(2), participant_id: 0x000(1)
-[micro_ros_agent-4] [35m[1783400010.848758][m info     | [34mProxyClient.cpp   [m | [37mcreate_subscriber       [m | [32msubscriber created[m     | client_key: 0x6F79CA20, subscriber_id: 0x000(4), participant_id: 0x000(1)
-[micro_ros_agent-4] [35m[1783400010.868396][m info     | [34mProxyClient.cpp   [m | [37mcreate_datareader       [m | [32mdatareader created[m     | client_key: 0x6F79CA20, datareader_id: 0x000(6), subscriber_id: 0x000(4)
-[micro_ros_agent-4] [35m[1783400010.887057][m info     | [34mProxyClient.cpp   [m | [37mcreate_replier          [m | [32mreplier created[m        | client_key: 0x6F79CA20, requester_id: 0x000(7), participant_id: 0x000(1)
+[sensor_logger-2] [INFO] [1783403693.375472640] [sensor_logger]: SQLite database ready at /home/agribot/.agribot/history.db
+[sensor_logger-2] [INFO] [1783403693.663965554] [sensor_logger]: SensorLogger node started – waiting for DHT11 data
+[rosbridge_websocket-1] [WARN] [1783403694.055945872] [rosbridge_websocket]: The 'default_call_service_timeout' parameter is currently set to 0.0, which means service calls will block indefinitely if no response is received. Please note that in the Jazzy and later releases, the default value for this parameter will be updated to 5.0 seconds.
+[rosbridge_websocket-1] [WARN] [1783403694.062484375] [rosbridge_websocket]: The 'call_services_in_new_thread' parameter is currently set to False, which means service calls will block the main thread. Please note that in the Jazzy and later releases, the default value for this parameter will be updated to True.
+[rosbridge_websocket-1] [WARN] [1783403694.067860585] [rosbridge_websocket]: The 'send_action_goals_in_new_thread' parameter is currently set to False, which means sending action goals will block the main thread. Please note that in the Jazzy and later releases, the default value for this parameter will be updated to True.
+[rosbridge_websocket-1] [INFO] [1783403694.081743664] [rosbridge_websocket]: Rosbridge WebSocket server started on port 9090
+[micro_ros_agent-4] [35m[1783403694.345539][m error    | [34mUDPv4AgentLinux.cpp[m | [37minit                    [m | [31mbind error[m             | port: 8888, errno: 98
+[micro_ros_agent-4] [35m[1783403694.345937][m info     | [34mUDPv4AgentLinux.cpp[m | [37mfini                    [m | [32mserver stopped[m         | port: 8888
+[micro_ros_agent-4] Error while starting IPvX agent!
+[INFO] [micro_ros_agent-4]: process has finished cleanly [pid 11979]
