@@ -293,8 +293,7 @@ private:
     }
 
     // ── cmd_servo callback (runs on Core 0 via executor) ─────────────
-    static void servoCallback(const void* msg_in, void* context) {
-        (void)context;
+    static void servoCallback(const void* msg_in) {
         const std_msgs__msg__Int32* msg =
             static_cast<const std_msgs__msg__Int32*>(msg_in);
 
