@@ -53,7 +53,7 @@ We will integrate one of the following options:
 ---
 
 ## 📂 Project Structure
-* `/esp-firmware/` - Micro-ROS C++ firmware for the main ESP32 (sensors, motors).
-* `/esp-drive-node/` & `/esp-payload-node/` - Python-based ROS 2 nodes for high-level robot logic and payload control.
+* `/esp-firmware/` - Legacy combined Micro-ROS C++ firmware for a single ESP32 setup.
+* `/esp-drive-node/` & `/esp-payload-node/` - Micro-ROS C++ firmware PlatformIO projects for the ESP32s handling drive logic and payload sensors/actuation.
 * `/agribot_web/` - Contains the `rosbridge` launcher and the Vite/React frontend dashboard.
 * `/agribot/` - Legacy/Fallback implementation containing standalone Firebase integrations and ESP32-CAM sketches.

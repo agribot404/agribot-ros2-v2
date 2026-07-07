@@ -99,15 +99,11 @@ ros2 launch agribot_web agribot_web.launch.py
 1. **`rosbridge_websocket`** (Port `9090`): Bridges ROS 2 DDS to WebSockets for the frontend React dashboard.
 2. **`sensor_logger`**: A ROS 2 Python node that subscribes to DHT11 topics and logs to SQLite.
 3. **`web_server`** (Port `8080`): The FastAPI server serving the frontend and REST API.
+4. **`micro_ros_agent`** (Port `8888`): A Docker container running the micro-ROS agent, bridging the ESP32 nodes to the ROS 2 network.
 
-### C. Where is the Camera and micro-ROS Agent?
+### C. Where is the Camera?
 - **Camera Stream**: The camera stream operates independently of ROS 2. It serves an MJPEG stream directly over HTTP on port 81 and broadcasts via mDNS as `agricam.local`. The dashboard embeds this directly.
-- **micro-ROS Agent**: If the micro-ROS agent is *not* dynamically included in your local `agribot_web.launch.py`, you must either add it to the launch file or run it in a separate terminal:
-
-```bash
-# Run standalone micro-ROS agent (UDP port 8888)
-ros2 run micro_ros_agent micro_ros_agent udp4 --port 8888
-```
+*(Note: The micro-ROS Agent is now automatically started via Docker in the launch file.)*
 
 ---
 
