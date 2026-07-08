@@ -7,5 +7,5 @@
 // ═══════════════════════════════════════════════════════════════════
 #pragma once
 
-#define WIFI_SSID "SD VILLA 2"
-#define WIFI_PASS "bablu2025"
+#define WIFI_SSID "internet"
+#define WIFI_PASS "12345678"
