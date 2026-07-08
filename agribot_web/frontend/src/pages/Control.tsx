@@ -120,20 +120,49 @@ export const Control: React.FC = () => {
   }, []);
 
   // ------------------------------------------------------------------
+  //  Continuous Movement Logic
+  // ------------------------------------------------------------------
+
+  const moveInterval = useRef<NodeJS.Timeout | null>(null);
+
+  // Cleanup interval on unmount
+  useEffect(() => {
+    return () => {
+      if (moveInterval.current) clearInterval(moveInterval.current);
+    };
+  }, []);
+
+  const startMoving = useCallback((moveFn: () => void) => {
+    if (moveInterval.current) {
+      clearInterval(moveInterval.current);
+    }
+    moveFn(); // Execute immediately
+    moveInterval.current = setInterval(moveFn, 100); // Repeat at 10Hz
+  }, []);
+
+  const stopMoving = useCallback(() => {
+    if (moveInterval.current) {
+      clearInterval(moveInterval.current);
+      moveInterval.current = null;
+    }
+    stop();
+  }, [stop]);
+
+  // ------------------------------------------------------------------
   //  D-pad button factory (avoids repeating mouse/touch handlers)
   // ------------------------------------------------------------------
 
   const dpadButton = (
     icon: React.ReactNode,
-    onPress: () => void,
+    moveFn: () => void,
     className?: string,
   ) => (
     <button
-      onMouseDown={onPress}
-      onMouseUp={stop}
-      onMouseLeave={stop}
-      onTouchStart={(e) => { e.preventDefault(); onPress(); }}
-      onTouchEnd={(e) => { e.preventDefault(); stop(); }}
+      onMouseDown={() => startMoving(moveFn)}
+      onMouseUp={stopMoving}
+      onMouseLeave={stopMoving}
+      onTouchStart={(e) => { e.preventDefault(); startMoving(moveFn); }}
+      onTouchEnd={(e) => { e.preventDefault(); stopMoving(); }}
       className={`w-20 h-20 bg-white hover:bg-agri-accent border border-emerald-200/80 text-emerald-900 hover:text-white rounded-2xl shadow-xl flex items-center justify-center transition-all duration-150 active:scale-90 active:bg-blue-400 ${className || ''}`}
     >
       {icon}
